@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Analysis Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animation for smooth appearance of results */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <div class="container mx-auto max-w-3xl px-4 py-12 flex-1">
+        <!-- Main content area -->
+        <div class="text-center space-y-12">
+            <!-- Title -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                Aspect-Based Sentiment Analysis (ABSA)
+            </h1>
+            
+            <!-- Input section -->
+            <div class="space-y-12">
+                <!-- Text box for user input -->
+                <textarea id="input-box" 
+                        class="w-full h-40 px-6 py-4 rounded-2xl shadow-lg border border-gray-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all resize-none"
+                        placeholder="Type or paste your review here..."></textarea>
+                
+                <!-- Action buttons -->
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <!-- Button to fill example review -->
+                    <button onclick="fillExampleReview()" 
+                            class="w-full md:w-auto px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-xl shadow-lg transition-all transform hover:scale-105">
+                        Try An Example
+                    </button>
+
+                    <!-- Analysis button -->
+                    <button onclick="analyzeText()" 
+                            class="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-lg transition-all transform hover:scale-105">
+                        Analyse Review
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results section (hidden until analysis) -->
+        <div id="results" class="hidden opacity-0 space-y-3 mt-12">
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Analysis Results</h3>
+                <!-- Container where results will appear -->
+                <div id="aspects-container" class="space-y-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example reviews to show how it works
+        const sampleReviews = [
+            "Lovely friendly staff, amazing location with great city views. Rooms are clean but bathroom is quite small. The breakfast could use more variety though.",
+            "Excellent facilities and convenient location. The room was clean but slightly outdated. Staff were exceptionally helpful throughout our stay."
+        ];
+
+        // Fill the text box with an example review
+        function fillExampleReview() {
+            const randomReview = sampleReviews[Math.floor(Math.random() * sampleReviews.length)];
+            document.getElementById('input-box').value = randomReview;
+        }
+
+        // Analyze Review function
+        function analyzeText() {
+            const resultsElement = document.getElementById('results');
+            
+            // Hide old results while loading
+            resultsElement.classList.add('hidden');
+            
+            // Example loading time (replace it later with real analysis results)
+            setTimeout(() => {
+                // Example data (replace it later with real analysis results)
+                const mockResults = [
+                    {aspect: 'FACILITIES', sentiment: 'positive'},
+                    {aspect: 'LOCATION', sentiment: 'positive'},
+                    {aspect: 'ROOM_AMENITIES', sentiment: 'negative'},
+                    {aspect: 'CLEANLINESS', sentiment: 'positive'},
+                    {aspect: 'SERVICE', sentiment: 'positive'}
+                ];
+
+                // Show the results on screen
+                displayResults(mockResults);
+                resultsElement.classList.remove('hidden', 'opacity-0');
+                resultsElement.classList.add('fade-in');
+            }, 500);
+        }
+
+        // Show the results list
+        function displayResults(results) {
+            const container = document.getElementById('aspects-container');
+            container.innerHTML = ''; // Clear previous results
+            
+            // Create each result line
+            results.forEach((result, index) => {
+                const aspectDiv = document.createElement('div');
+                // Style differently for negative results
+                aspectDiv.className = `flex items-center justify-between p-4 rounded-xl 
+                    ${result.sentiment === 'negative' ? 'bg-gray-100' : 'bg-white'}`;
+                
+                // Text parts
+                aspectDiv.innerHTML = `
+                    <span class="font-medium text-gray-700">${result.aspect.replace(/_/g, ' ')}</span>
+                    <span class="text-sm ${result.sentiment === 'positive' ? 'text-green-600' : 'text-red-600'}">
+                        ${result.sentiment.toUpperCase()}
+                    </span>
+                `;
+                
+                // Add to results list
+                container.appendChild(aspectDiv);
+            });
+        }
+    </script>
+</body>
+
+<footer class="text-center text-gray-500 text-sm py-4">
+    <p>&copy; 2025 UTS Research Project. All rights reserved. </p>
+</footer>
+</html>
