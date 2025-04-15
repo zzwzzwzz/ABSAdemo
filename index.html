@@ -13,21 +13,25 @@
         .fade-in {
             animation: fadeIn 0.3s ease-out forwards;
         }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
     <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
 
 <body class="bg-gray-50 min-h-screen flex flex-col">
-    <div class="container mx-auto max-w-3xl px-4 py-12 flex-1">
+    <div class="container mx-auto max-w-3xl px-4 py-12 flex-1 grid place-items-center min-h-[calc(100vh_-_theme(spacing.12)_-_theme(spacing.16))]">
         <!-- Main content area -->
-        <div class="text-center space-y-12">
+        <div class="text-center space-y-12 w-full transition-all duration-300">
             <!-- Title -->
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">
                 Aspect-Based Sentiment Analysis (ABSA)
             </h1>
             
             <!-- Input section -->
-            <div class="space-y-12">
+            <div class="space-y-12 w-full">
                 <!-- Text box for user input -->
                 <textarea id="input-box" 
                         class="w-full h-40 px-6 py-4 rounded-2xl shadow-lg border border-gray-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all resize-none"
@@ -51,18 +55,17 @@
         </div>
 
         <!-- Results section (hidden until analysis) -->
-        <div id="results" class="hidden opacity-0 space-y-3 mt-12">
+        <div id="results" class="hidden opacity-0 space-y-3 mt-12 transition-all duration-300 translate-y-4 w-full">
             <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                <h3 class="text-xl font-semibold text-gray-800 mb-6">Analysis Results</h3>
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 w-full">Analysis Results</h3>
                 <!-- Container where results will appear -->
-                <div id="aspects-container" class="space-y-3"></div>
+                <div id="aspects-container" class="space-y-3 w-full"></div>
             </div>
         </div>
     </div>
 
-<!-- JavaScript -->
-<script src="js/scripts.js"></script>
-
+    <!-- JavaScript -->
+    <script src="js/scripts.js"></script>
 </body>
 
 <footer class="text-center text-gray-500 text-sm py-4">
