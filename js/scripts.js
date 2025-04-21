@@ -1,7 +1,11 @@
 // Example reviews to show how it works
 const sampleReviews = [
-    "Lovely friendly staff, amazing location with great city views. Rooms are clean but bathroom is quite small. The breakfast could use more variety though.",
-    "Excellent facilities and convenient location. The room was clean but slightly outdated. Staff were exceptionally helpful throughout our stay."
+    // Restaurant reviews
+    "The pasta was perfectly cooked and the sauce was delicious. However, the service was a bit slow during peak hours. Their wine selection is impressive and reasonably priced. The ambiance could use some improvement but overall it's a good place for dinner.",
+    "Great food quality but small portion sizes for the price. The staff was incredibly attentive and friendly. The restaurant has a nice atmosphere with comfortable seating. Parking was a nightmare though, and they don't offer valet service.",
+    // Laptop reviews
+    "This laptop has excellent battery life and the display quality is stunning. The keyboard feels a bit cramped though. It runs all my software smoothly with no lag, and the build quality is solid. The price is higher than competitors with similar specs.",
+    "The processor speed is phenomenal for multitasking, but the laptop tends to overheat during gaming. The design is sleek and lightweight making it perfect for travel. The speakers are surprisingly good for such a thin device."
 ];
 
 // Fill the text box with an example review
@@ -19,14 +23,32 @@ function analyzeText() {
     
     // Example loading time (replace it later with real analysis results)
     setTimeout(() => {
-        // Example data (replace it later with real analysis results)
-        const mockResults = [
-            {aspect: 'FACILITIES', sentiment: 'positive'},
-            {aspect: 'LOCATION', sentiment: 'positive'},
-            {aspect: 'ROOM_AMENITIES', sentiment: 'negative'},
-            {aspect: 'CLEANLINESS', sentiment: 'positive'},
-            {aspect: 'SERVICE', sentiment: 'positive'}
-        ];
+        // Get input text to determine domain (restaurant vs laptop)
+        const inputText = document.getElementById('input-box').value.toLowerCase();
+        let mockResults;
+        
+        // Check if it's more likely a restaurant or laptop review
+        if (inputText.includes('food') || inputText.includes('restaurant') || 
+            inputText.includes('menu') || inputText.includes('service') || 
+            inputText.includes('waiter') || inputText.includes('dining')) {
+            // Restaurant domain aspects
+            mockResults = [
+                {aspect: 'FOOD_QUALITY', sentiment: 'positive'},
+                {aspect: 'SERVICE', sentiment: 'negative'},
+                {aspect: 'PRICE', sentiment: 'positive'},
+                {aspect: 'AMBIENCE', sentiment: 'negative'},
+                {aspect: 'MENU_VARIETY', sentiment: 'positive'}
+            ];
+        } else {
+            // Laptop domain aspects
+            mockResults = [
+                {aspect: 'PERFORMANCE', sentiment: 'positive'},
+                {aspect: 'BATTERY', sentiment: 'positive'},
+                {aspect: 'DESIGN', sentiment: 'positive'},
+                {aspect: 'DISPLAY', sentiment: 'positive'},
+                {aspect: 'PRICE', sentiment: 'negative'}
+            ];
+        }
 
         // Show the results on screen
         displayResults(mockResults);
